@@ -43,16 +43,29 @@ router.get('/', (req, res, next) => {
 router.get('/', (req, res, next) => {
   const orderByTitle =
     req?.query?.order?.includes('title')
+    /* req?.query?.order? -> on vérifie si y'a un paramètre de requete order, et si y'en a un
+    .includes('title') -> on vérifie si la valeur contient title, si oui
+    ? req.query.order -> on récupère cette valeur, sinon
+    : undefined -> on renvoie undefined pour dire que cette valeur n'est pas définie
+    */
       ? req.query.order
       : undefined;
   let orderedMenu;
   console.log(`order by ${orderByTitle ?? 'not requested'}`);
+  /* là c'est un template string, on cherche la valeur de orderByTitle
+  Le ?? nous permet de prendre la valeur de orderByTitle si elle n'est pas nullish
+  Sinon (si elle est null ou undefined) on renvoie 'not found'
+  */
   if (orderByTitle)
     orderedMenu = [...MENU].sort((a, b) => a.title.localeCompare(b.title));
   if (orderByTitle === '-title') orderedMenu = orderedMenu.reverse();
 
   console.log('GET /pizzas');
   res.json(orderedMenu ?? MENU);
+  /* Y'a moyen qu'on rentre pas dans le if(orderByTitle), dans ce cas
+  on aura odreredMenu qui est undefined car on lui donne une valeur dans le if
+  Si c'est le cas (qu'il est nullish) alors on renvoie le menu de base
+   */
 });
 
 
@@ -71,6 +84,10 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   const title = req?.body?.title?.length !== 0 ? req.body.title : undefined;
   const content = req?.body?.content?.length !== 0 ? req.body.content : undefined;
+/*Là on vérifie si on a reçu des chaines vides, si oui alors on renvoie dans les 2 cas
+(ici et dans le if juste en dessous), une erreur pour dire au client qu'il a 
+fait une mauvaise requete
+*/
 
   console.log('POST /pizzas');
 
