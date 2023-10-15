@@ -1,0 +1,22 @@
+### Create
+@baseURl = http://localhost:3000
+
+### Read all films
+GET {{baseURl}}/films
+
+##### READ ALL FILTERED : Lire toutes les ressources de la collection selon le filtre donné
+GET {{baseURl}}/films?minimum-duration=200
+
+##### READ ONE : Lire la ressource identifiée
+GET {{baseURl}}/films/3
+
+### CREATE ONE : Créer une ressource basée sur les données de la requête
+POST {{baseURl}}/films/
+Content-Type: application/json
+
+{
+    "title": "Pitch Perfect",
+    "duration": 150,
+    "budget": 200,
+    "link": "https://www.imdb.com/title/tt1981677/"
+}
