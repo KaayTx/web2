@@ -18,3 +18,11 @@ Content-Type: application/json
     "title":"Magic Green",
     "content":"Epinards, Brocolis, Olives vertes, Basilic"
 }
+
+### Create a pizza which lacks a property
+POST {{baseUrl}}/pizzas
+Content-Type: application/json
+
+{
+    "content":"Epinards, Brocolis, Olives vertes, Basilic"
+}
