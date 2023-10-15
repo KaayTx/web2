@@ -109,4 +109,62 @@ fait une mauvaise requete
 });
 
 
+// Delete a pizza from the menu based on its id
+router.delete('/:id', (req, res) => {
+  /* :id -> paramètre de route qui prendre l'id de la ressource à modifier
+  (ce que rentre le client dans l'url de la requete)
+  */
+  console.log(`DELETE /pizzas/${req.params.id}`);
+
+  const foundIndex = MENU.findIndex(pizza => pizza.id == req.params.id);
+/*Là on va récupérer l'element qu'on veut effacer */
+  if (foundIndex < 0) return res.sendStatus(404);
+/*Si on trouve pas d'élement dans le menu avec l'id passé en paramètre, on renvoie une erreur  */
+  
+const itemsRemovedFromMenu = MENU.splice(foundIndex, 1);
+  /*splice -> efface les elemnts à partir de l'index trouvé
+  1 -> pour lui demander d'effacer un seul element 
+  splice renvoie un tableau avec tous les elements supprimés meme si on enleve qu'un seul element*/
+
+  const itemRemoved = itemsRemovedFromMenu[0];
+/*On récupère le premier element supprimé du tableau qui contient tous les elements supprimés */
+//normalement le tableau doit tjrs contenir un seul element car l'id est unique  
+res.json(itemRemoved);
+});
+
+
+// Update a pizza based on its id and new values for its parameters
+router.patch('/:id', (req, res) => {
+  //là on indique la méthode patch pour dire qu'on veut modifier
+  // :id -> on récupère le paramètre de route càd l'id rentré par le client dans l'url
+  console.log(`PATCH /pizzas/${req.params.id}`);
+
+  const title = req?.body?.title;
+  const content = req?.body?.content;
+
+  console.log('POST /pizzas');
+
+  if ((!title && !content) || title?.length === 0 || content?.length === 0) return res.sendStatus(400);
+// On renvoie un BadRequest si on a reçu ni un titre ni un contenu
+
+//On continue si on reçoit un des deux
+  const foundIndex = MENU.findIndex(pizza => pizza.id == req.params.id);
+
+  if (foundIndex < 0) return res.sendStatus(404);
+
+  const updatedPizza = {...MENU[foundIndex], ...req.body};
+/*si on trouve la ressource(id entré par client) -> alors 
+...MENU[foundIndex] ->on va créer un objet qui contient toutes les propriétés de l'objet trouvé
+MENU[foundIndex] -> pour accéder à l'objet via son indice dans l'array du MENU
+... -> on copie toutes les propriétés de cet objet
+...req.body -> on vient écraser toutes les propriétés mises dans le body de la requete
+ici le body c'est ce qu'il y'a dans pizzas.http et donc le title
+*/
+
+  MENU[foundIndex] = updatedPizza;
+  //On met à jour le tableau en indiquant la pizza à jour dans l'index où on veut modifier
+
+  res.json(updatedPizza);
+})
+
 module.exports = router;
