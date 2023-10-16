@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "title": "Percy Jackson",
+        "duration": 180,
+        "budget": "100",
+        "link": "https://www.imdb.com/title/tt0814255/"
+    },
+    {
+        "id": 2,
+        "title": "Harry Potter",
+        "duration": 650,
+        "budget": 200,
+        "link": "https://www.imdb.com/title/tt0814255/"
+    },
+    {
+        "id": 3,
+        "title": "The bridge of therabithia",
+        "duration": 160,
+        "budget": 60,
+        "link": "https://www.imdb.com/title/tt0814255/"
+    },
+    {
+        "id": 4,
+        "title": "Pitch Perfect",
+        "link": "https://www.imdb.com/title/tt1981677/",
+        "duration": 150,
+        "budget": 200
+    }
+]
