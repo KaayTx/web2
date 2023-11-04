@@ -1,0 +1,86 @@
+### Create
+@baseUrl = http://localhost:3000
+
+### Read all films
+GET {{baseUrl}}/films
+
+##### READ ALL FILTERED : Lire toutes les ressources de la collection selon le filtre donné
+GET {{baseUrl}}/films?minimum-duration=200
+
+##### READ ONE : Lire la ressource identifiée
+GET {{baseUrl}}/films/3
+
+### CREATE ONE : Créer une ressource basée sur les données de la requête
+POST {{baseUrl}}/films/
+Content-Type: application/json
+
+{
+    "title": "Pitch Perfect",
+    "duration": 150,
+    "budget": 200,
+    "link": "https://www.imdb.com/title/tt1981677/"
+}
+
+
+
+#### Try to create a film with a parameter missing or empty string or string with whitespaces only
+POST {{baseUrl}}/films/
+Content-Type: application/json
+
+{
+    "title":" ",
+    "duration": 136,
+    "budget": 115,
+    "link":"https://en.wikipedia.org/wiki/Star_Wars:_Episode_I_%E2%80%93_The_Phantom_Menace"
+}
+
+### Try to create a film with a wrong budget
+POST {{baseUrl}}/films/
+Content-Type: application/json
+
+{
+    "title":"Star Wars: The Phantom Menace (Episode I)",
+    "duration": 136,
+    "budget": "115",
+    "link":"https://en.wikipedia.org/wiki/Star_Wars:_Episode_I_%E2%80%93_The_Phantom_Menace"
+}
+
+### Create another film
+POST {{baseUrl}}/films/
+Content-Type: application/json
+
+{
+    "title":"Star Wars: Episode 2",
+    "duration": 1,
+    "budget": 11,
+    "link":"findIt.com"
+}
+
+### Read film with ID == 1
+GET {{baseUrl}}/films/1
+
+### Read film which does not exist
+GET {{baseUrl}}/films/500
+
+###DELETE movie
+DELETE {{baseUrl}}/films/2
+
+###PATCH movie
+PATCH {{baseUrl}}/films/1
+Content-Type: application/json
+
+{
+    "title": "Stars wars 3",
+    "duration": 350
+}
+
+###PUT movie
+PUT {{baseUrl}}/films/5
+Content-Type: application/json
+
+{
+    "title":"Star Wars: Episode II Attack of the Clones",
+    "duration": 142,
+    "budget": 115,
+    "link":"https://en.wikipedia.org/wiki/Star_Wars:_Episode_II_%E2%80%93_Attack_of_the_Clones"
+}
