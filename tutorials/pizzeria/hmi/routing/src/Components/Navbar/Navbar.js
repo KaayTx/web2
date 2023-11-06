@@ -50,11 +50,11 @@ function onNavBarClick() {
   navItems.forEach((item) => {
     item.addEventListener('click', (e) => {
       console.log(`click on ${e.target.dataset.uri} navbar item`);
-      if (e.target.dataset.uri === 'Home') {
+      if (e.target.dataset.uri === '/') {
         HomePage();
-      } else if (e.target.dataset.uri === 'Login') {
+      } else if (e.target.dataset.uri === '/login') {
         LoginPage();
-      } else if (e.target.dataset.uri === 'Register') {
+      } else if (e.target.dataset.uri === '/register') {
         RegisterPage();
       }
     });
