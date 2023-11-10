@@ -1,8 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { Navbar as BootstrapNavbar } from 'bootstrap';
-import HomePage from '../Pages/HomePage';
-import ViewMoviePage from '../Pages/ViewMoviePage';
-import AddMoviePage from '../Pages/AddMoviePage';
+
 
 /**
  * Render the Navbar which is styled by using Bootstrap
@@ -11,12 +9,8 @@ import AddMoviePage from '../Pages/AddMoviePage';
  * - the router will show the Page associated to this URI when the user click on a nav-link
  */
 
-const Navbar = () => {
-  renderNavbar();
-  onNavBarClick();
-};
 
-function renderNavbar(){
+const Navbar = () => {
   const navbar = document.querySelector('#navbarWrapper');
   navbar.innerHTML = `
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -39,10 +33,10 @@ function renderNavbar(){
                 <a class="nav-link" aria-current="page" href="#" data-uri="/">Home</a>
               </li>
               <li id="viewItem" class="nav-item">
-                <a class="nav-link" href="#" data-uri="/view">View movie</a>
+                <a class="nav-link" href="#" data-uri="/movies">View movie</a>
               </li>     
               <li id="addItem" class="nav-item">
-              <a class="nav-link" href="#" data-uri="/add">Add movie</a>
+              <a class="nav-link" href="#" data-uri="/movies/add">Add movie</a>
             </li>                     
             </ul>
           </div>
@@ -51,22 +45,5 @@ function renderNavbar(){
   `;
 };
 
-
-function onNavBarClick() {
-  const navItems = document.querySelectorAll('.nav-link');
-
-  navItems.forEach((item) => {
-    item.addEventListener('click', (e) => {
-      console.log(`click on ${e.target.dataset.uri} navbar item`);
-      if (e.target.dataset.uri === '/') {
-        HomePage();
-      } else if (e.target.dataset.uri === '/view') {
-        ViewMoviePage();
-      } else if (e.target.dataset.uri === '/add') {
-        AddMoviePage();
-      }
-    });
-  });
-}
 
 export default Navbar;
