@@ -1,0 +1,36 @@
+
+
+### Read all games with File variable
+@baseUrl = http://localhost:3000
+GET {{baseUrl}}/games
+
+
+### 2.1) get a new game without filtering the level
+GET {{baseUrl}}/games/start
+
+###  2.1) get a new game for a specific level
+GET {{baseUrl}}/games/start/?level=medium
+
+
+### Read all users with File variable
+GET {{baseUrl}}/games/users
+
+#### 2.2.a) create the game result by providing a correct score for a user
+POST {{baseUrl}}/games/users
+Content-Type: application/json
+
+{
+    "username":"username2",
+    "score": 1
+}
+
+#### 2.2.b) try to create the game result by provinding a wrong score for a user
+
+POST {{baseUrl}}/games/users
+Content-Type: application/json
+
+{
+    "username":"username2",
+    "score": 4
+}
+
