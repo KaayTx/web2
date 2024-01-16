@@ -1,6 +1,6 @@
 const movies = [];
 
-const readAllMovies = () => fetch('/api/movies').then((reponse) => reponse.json());
+const readAllMovies = () => movies;
 
 const addOneMovie = (movie) => movies.push(movie);
 
